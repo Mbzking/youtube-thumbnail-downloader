@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Free YouTube Thumbnail Downloader | Get HD Thumbnails Instantly</title>
+    
+    <meta name="description" content="Download high-quality YouTube video thumbnails instantly. Our free tool allows you to grab YouTube thumbnails in HD, Medium, and Small sizes.">
+    <meta name="keywords" content="YouTube Thumbnail Downloader, Download YouTube Thumbnails, Free YouTube Thumbnail Grabber, Get YouTube Thumbnails">
+    
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 0; 
+            background-color: #121212; 
+            color: #fff; 
+            transition: background 0.3s, color 0.3s; 
+            display: flex;
+            justify-content: center;
+        }
+
+        .container { 
+            max-width: 600px; 
+            margin: auto; 
+            padding: 20px; 
+            width: 100%;
+            z-index: 1;
+        }
+
+         .ad-space {
+        width: 160px; /* Smaller ad width */
+        height: 600px; /* Standard skyscraper ad height */
+        background: #222;
+        color: #bbb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 14px;
+        margin: 10px;
+    }
+
+        .main-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        input, button { 
+            width: 100%; 
+            max-width: 400px; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+            border: 1px solid #444; 
+            background: #222; 
+            color: #fff; 
+            font-size: 16px; 
+        }
+
+        button { 
+            border: none; 
+            cursor: pointer; 
+            background: #1e88e5; 
+            color: white; 
+            transition: 0.3s; 
+        }
+
+        button:hover { 
+            background: #1565c0; 
+        }
+
+        .download-btn { 
+            display: block; 
+            margin: 10px auto; 
+            padding: 12px; 
+            background: #28a745; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            width: 100%; 
+            max-width: 400px; 
+        }
+
+        .download-btn:hover { 
+            background: #218838; 
+        }
+
+        img { 
+            margin-top: 20px; 
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 10px; 
+            width: 100%; 
+        }
+
+        .toggle-btn { 
+            background: #ffcc00; 
+            color: #000; 
+            width: 100%; 
+            max-width: 200px; 
+        }
+
+        .light-mode { 
+            background: #ffffff; 
+            color: #000; 
+        }
+
+        .light-mode input { 
+            background: #f4f4f4; 
+            color: #000; 
+            border: 1px solid #ccc; 
+        }
+
+        .light-mode button { 
+            background: #007bff; 
+            color: white; 
+        }
+
+        .light-mode .download-btn { 
+            background: #28a745; 
+        }
+
+        .light-mode .toggle-btn { 
+            background: #333; 
+            color: white; 
+        }
+
+       /* Hide ads on small screens */
+    @media (max-width: 1024px) {
+        .ad-space {
+            display: none;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <!-- Left Ad Space -->
+        <div class="ad-space">
+            <!-- Google AdSense or Banner Ad -->
+            <p>Advertisement</p>
+        </div>
+
+        <div class="container">
+            <h1>🎥 YouTube Thumbnail Downloader</h1>
+            <button class="toggle-btn" onclick="toggleMode()">☀️ White Mode</button>
+            <p>Enter a YouTube video URL to get its thumbnail:</p>
+
+            <input type="text" id="videoUrl" placeholder="Paste YouTube video URL">
+            <button onclick="getThumbnail()">Get Thumbnail</button>
+
+            <h3>Thumbnail Preview:</h3>
+            <img id="thumbnail" src="" alt="Thumbnail will appear here">
+
+            <div id="downloadButtons" style="display: none;">
+                <a id="hd" class="download-btn" href="#" download>Download HD (1280x720)</a>
+                <a id="medium" class="download-btn" href="#" download>Download Medium (320x180)</a>
+                <a id="default" class="download-btn" href="#" download>Download Small (120x90)</a>
+            </div>
+        </div>
+
+        <!-- Right Ad Space -->
+        <div class="ad-space">
+            <!-- Google AdSense or Banner Ad -->
+            <p>Advertisement</p>
+        </div>
+    </div>
+
+    <script>
+        function getThumbnail() {
+            let url = document.getElementById('videoUrl').value;
+            let videoId = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+            
+            if (videoId) {
+                let id = videoId[1];
+                document.getElementById('thumbnail').src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+                document.getElementById('downloadButtons').style.display = "block";
+
+                document.getElementById('hd').href = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+                document.getElementById('medium').href = `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+                document.getElementById('default').href = `https://img.youtube.com/vi/${id}/default.jpg`;
+            } else {
+                alert("Invalid YouTube URL!");
+            }
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("light-mode");
+            let btn = document.querySelector(".toggle-btn");
+            if (document.body.classList.contains("light-mode")) {
+                btn.innerHTML = "🌙 Dark Mode";
+            } else {
+                btn.innerHTML = "☀️ White Mode";
+            }
+        }
+    </script>
+
+</body>
+</html>
